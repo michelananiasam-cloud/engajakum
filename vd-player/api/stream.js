@@ -1,28 +1,10 @@
-const { execSync } = require("child_process");
+const fs = require("fs");
 
 module.exports = (req, res) => {
 
-    try {
-
-        const resultado = execSync(
-            "yt-dlp --version",
-            {
-                encoding: "utf8"
-            }
-        );
-
-        res.json({
-            ok: true,
-            resultado
-        });
-
-    } catch (err) {
-
-        res.json({
-            ok: false,
-            erro: err.message
-        });
-
-    }
+    res.json({
+        ok: true,
+        arquivos: fs.readdirSync(process.cwd())
+    });
 
 };
