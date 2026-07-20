@@ -5,7 +5,7 @@ module.exports = (req, res) => {
     try {
 
         const resultado = execSync(
-            "node --version",
+            "yt-dlp --version",
             {
                 encoding: "utf8"
             }
