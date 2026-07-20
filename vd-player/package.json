@@ -1,7 +1,11 @@
 {
   "name": "vd-player",
   "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
-    "youtube-dl-exec": "^3.0.22"
+    "express": "^4.21.2"
   }
 }
