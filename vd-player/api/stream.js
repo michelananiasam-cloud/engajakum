@@ -1,6 +1,28 @@
+const { execSync } = require("child_process");
+
 module.exports = (req, res) => {
-    res.json({
-        ok: true,
-        ambiente: "vercel"
-    });
+
+    try {
+
+        const resultado = execSync(
+            "node --version",
+            {
+                encoding: "utf8"
+            }
+        );
+
+        res.json({
+            ok: true,
+            resultado
+        });
+
+    } catch (err) {
+
+        res.json({
+            ok: false,
+            erro: err.message
+        });
+
+    }
+
 };
