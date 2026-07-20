@@ -1,21 +1,22 @@
-const fs = require("fs");
-const path = require("path");
+const youtubedl = require("youtube-dl-exec");
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
 
-    const projeto =
-        path.join(
-            process.cwd(),
-            "vd-player"
-        );
+    try {
 
-    res.json({
-        cwd: process.cwd(),
-        existeProjeto: fs.existsSync(projeto),
-        arquivosProjeto:
-            fs.existsSync(projeto)
-                ? fs.readdirSync(projeto)
-                : []
-    });
+        res.json({
+            ok: true,
+            carregou: true,
+            tipo: typeof youtubedl
+        });
+
+    } catch (err) {
+
+        res.json({
+            ok: false,
+            erro: err.message
+        });
+
+    }
 
 };
