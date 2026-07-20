@@ -3,56 +3,43 @@ const { execSync } = require("child_process");
 
 const app = express();
 
+app.use(express.json());
+
 app.get("/", (req, res) => {
 
     res.json({
         ok: true,
-        ambiente: "railway"
+        ambiente: "railway",
+        yt_dlp: true
     });
 
 });
 
-app.get("/python", (req, res) => {
+app.post("/api/stream", (req, res) => {
 
     try {
 
-        const resultado = execSync(
-            "python3 --version",
+        const youtubeUrl =
+            req.body.youtubeUrl;
+
+        const streamUrl = execSync(
+            `yt-dlp -f 18 -g "${youtubeUrl}"`,
             {
                 encoding: "utf8"
             }
-        );
+        ).trim();
 
-        res.send(resultado);
-
-    } catch (err) {
-
-        res.status(500).send(
-            err.message
-        );
-
-    }
-
-});
-
-app.get("/yt", (req, res) => {
-
-    try {
-
-        const resultado = execSync(
-            "yt-dlp --version",
-            {
-                encoding: "utf8"
-            }
-        );
-
-        res.send(resultado);
+        res.json({
+            ok: true,
+            stream_url: streamUrl
+        });
 
     } catch (err) {
 
-        res.status(500).send(
-            err.message
-        );
+        res.status(500).json({
+            ok: false,
+            erro: err.message
+        });
 
     }
 
