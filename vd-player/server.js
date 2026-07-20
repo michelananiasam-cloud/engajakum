@@ -1,23 +1,9 @@
-const express = require("express");
-const { execSync } = require("child_process");
-
-const app = express();
-
-app.get("/", (req, res) => {
-
-    res.json({
-        ok: true,
-        ambiente: "railway"
-    });
-
-});
-
-app.get("/python", (req, res) => {
+app.get("/yt", (req, res) => {
 
     try {
 
         const resultado = execSync(
-            "python3 --version",
+            "yt-dlp --version",
             {
                 encoding: "utf8"
             }
@@ -34,15 +20,3 @@ app.get("/python", (req, res) => {
     }
 
 });
-
-const PORT =
-    process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-
-    console.log(
-        `Servidor iniciado na porta ${PORT}`
-    );
-
-});
-``
