@@ -1,4 +1,7 @@
 {
   "name": "vd-player",
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "dependencies": {
+    "youtube-dl-exec": "^3.0.22"
+  }
 }
