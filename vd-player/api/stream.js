@@ -1,16 +1,16 @@
-const youtubedl = require("youtube-dl-exec");
+const { execSync } = require("child_process");
 
-module.exports = async (req, res) => {
+module.exports = (req, res) => {
 
     try {
 
-        const resultado = await youtubedl(
-            "https://youtu.be/G1nZyOFbxkc",
-            {
-                getUrl: true,
-                format: "18"
-            }
-        );
+        const resultado =
+            execSync(
+                "python --version",
+                {
+                    encoding: "utf8"
+                }
+            );
 
         res.json({
             ok: true,
@@ -21,8 +21,7 @@ module.exports = async (req, res) => {
 
         res.json({
             ok: false,
-            erro: err.message,
-            stack: err.stack
+            erro: err.message
         });
 
     }
