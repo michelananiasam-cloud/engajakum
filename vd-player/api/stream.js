@@ -4,17 +4,25 @@ module.exports = async (req, res) => {
 
     try {
 
+        const resultado = await youtubedl(
+            "https://youtu.be/G1nZyOFbxkc",
+            {
+                getUrl: true,
+                format: "18"
+            }
+        );
+
         res.json({
             ok: true,
-            carregou: true,
-            tipo: typeof youtubedl
+            resultado
         });
 
     } catch (err) {
 
         res.json({
             ok: false,
-            erro: err.message
+            erro: err.message,
+            stack: err.stack
         });
 
     }
